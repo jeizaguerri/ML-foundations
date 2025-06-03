@@ -1,0 +1,25 @@
+function [outputArg1,outputArg2] = untitled2(k, X, y, Lambdas, nClases)
+%Busca el mejor lambda de los introducidos mediante kfold para el
+%clasificador multiclase
+
+for lambdaSel = Lambdas
+    tasaAciertoT = 0;
+    tasaAciertoV = 0;
+    for fold = (1:k)
+        %Particion de datos
+        [ Xv, yv, Xtr, ytr ] = particion(fold, k, X, y);
+        %Entrenar
+        th = entrenarLogReg(Xtr, y, lambdaSel, nClases);
+        %Evaluar
+        tasaAciertoT = tasaAciertoT + tasaAcierto(clasePredicha(Xtr,th), ytr);
+        tasaAciertoV = tasaAciertoV + tasaAcierto(clasePredicha(Xv,th), yv);
+    end
+    tasaAciertoT = tasaAciertoT/k;
+    tasaAciertoV = tasaAciertoV/k;
+
+    if(tasaAciertoV > bestTasaAciertoV)
+        bes
+    end
+end
+end
+

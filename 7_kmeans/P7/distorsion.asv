@@ -1,0 +1,11 @@
+function [distorsion] = distorsion(D, mu, c)
+m = length(c);
+i = (1:m);
+muSel = mu(c, :);
+dSel = D(i, :);
+r =  dSel - muSel;
+distancia = sum(r, 2);
+distorsion = mean(distancia);
+
+end
+
